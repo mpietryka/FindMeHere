@@ -1,11 +1,14 @@
 import React from "react";
-import { Footer, Navbar } from "../../components";
+import { Footer, Navbar, Hero, Pricingtables } from "../../components";
 
 export const Landingpage = () => {
   return (
-    <div>
+    <div className="min-h-screen">
       <Navbar />
-      <p className="text-center text-3xl mt-10">Landing Page</p>
+      <div className=" mb-16 md:my-24">
+        <Hero />
+        <Pricingtables />
+      </div>
       <Footer />
     </div>
   );

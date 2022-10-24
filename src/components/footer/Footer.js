@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 
 export const Footer = () => {
   return (
-    <footer className="footer absolute bottom-0 items-center p-4 bg-neutral text-neutral-content">
-      <div className="items-center grid-flow-col">
-        <p>FindMeHere © 2022 - All right reserved</p>
+    <footer className="footer fixed bottom-0 items-center p-4 bg-neutral text-neutral-content flex flex-row justify-between">
+      <div className="text-xs md:text-sm items-center grid-flow-col">
+        <p>FindMeHere © 2022</p>
       </div>
-      <div className="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
+      <div className="">
         <Link to="/privacypolicy">
-          <span>Privacy Policy</span>
+          <span className="text-xs md:text-sm">Privacy Policy</span>
         </Link>
       </div>
     </footer>
