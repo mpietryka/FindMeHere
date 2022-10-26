@@ -5,11 +5,11 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { TextField } from "../../components/textField/TextField";
 import { auth, db } from "../../firebase-config";
-import {createUserWithEmailAndPassword} from "firebase/auth"
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { setDoc, doc } from "firebase/firestore";
 
 export const Register = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const validate = Yup.object({
     username: Yup.string()
@@ -26,25 +26,29 @@ export const Register = () => {
       .required("Please confirm your password"),
   });
 
-  const handleSubmit = async (values) =>{
-    try{
-        const result = await createUserWithEmailAndPassword(auth, values.email, values.password)
-        const newUser = {
-            uid: result.user.uid,
-            username: values.username,
-            email: values.email,
-            password: values.password,
-            profilePicture: "",
-            isLoggedIn: false
-        }
+  const handleSubmit = async (values) => {
+    try {
+      const result = await createUserWithEmailAndPassword(
+        auth,
+        values.email,
+        values.password
+      );
+      const newUser = {
+        uid: result.user.uid,
+        username: values.username,
+        email: values.email,
+        password: values.password,
+        profilePicture: "",
+        isLoggedIn: false,
+      };
 
-        console.log(newUser)
-        await setDoc(doc(db, "users", result.user.uid), newUser)
-        navigate("/login")
-    }catch (err){
-        console.log(err)
+      console.log(newUser);
+      await setDoc(doc(db, "users", result.user.uid), newUser);
+      navigate("/login");
+    } catch (err) {
+      console.log(err);
     }
-  }
+  };
 
   return (
     <div>
@@ -60,7 +64,7 @@ export const Register = () => {
           }}
           validationSchema={validate}
           onSubmit={(values) => {
-                  handleSubmit(values)
+            handleSubmit(values);
           }}
         >
           <Form>
