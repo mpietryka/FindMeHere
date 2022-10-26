@@ -1,5 +1,5 @@
 import React from "react";
-import { Footer, Navbar, Hero, Pricingtables } from "../../components";
+import { Footer, Navbar, Hero } from "../../components";
 
 export const Landingpage = () => {
   return (

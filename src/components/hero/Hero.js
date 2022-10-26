@@ -19,7 +19,7 @@ export const Hero = () => {
               et a id nisi.
             </p>
             <button className="btn btn-primary">
-            <Link to="/pricing">
+              <Link to="/pricing">
                 <span className="mx-4 opacity-80 transition-opacity hover:opacity-100">
                   Get Started
                 </span>

@@ -5,8 +5,10 @@ export const Privacypolicy = () => {
   return (
     <div>
       <Navbar />
-      <h1 className="text-5xl font-bold mt-12 text-center">Privacy Policy</h1>
-      <div className="text-center w-1/2 mx-auto m-12">
+      <h1 className="text-4xl md:text-5xl font-bold mt-12 text-center">
+        Privacy Policy
+      </h1>
+      <div className="text-justify w-3/4 md:w-1/2 mx-auto m-12 text-sm">
         <p className="my-4">
           Enim veniam sint irure non. Anim occaecat adipisicing nostrud nisi
           laboris cillum aute. Aliquip occaecat amet nisi fugiat.

@@ -1,9 +1,22 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext} from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { auth, db } from "../../firebase-config";
+import { signOut } from "firebase/auth"
+import { updateDoc, doc } from "firebase/firestore";
+import { AuthContext } from "../../context/auth";
 
 export const Navbar = () => {
+  const navigate = useNavigate();
+  const {user} = useContext(AuthContext) 
+  const handleLogout = async () => {
+    await updateDoc(doc(db, "users", auth.currentUser.uid), {
+      isLoggedIn: false, 
+    })
+    await signOut(auth);
+    navigate("/")
+  }
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-base-200">
       <div className="navbar-start">
         <Link to="/">
           <span className="btn btn-ghost normal-case text-xl">FindMeHere</span>
@@ -20,20 +33,39 @@ export const Navbar = () => {
                 </span>
               </Link>
             </li>
+            {user ? (
+              <>
+          <li> 
+            <Link to="/dashboard">
+            <span className="mx-4 opacity-80 transition-opacity hover:opacity-100">
+                  My Account
+                </span>
+            </Link>
+            </li>
             <li>
-              <Link to="/">
+            <span className="mx-4 opacity-80 transition-opacity hover:opacity-100" onClick={handleLogout}>Log out</span>
+          </li> 
+          </> 
+          )
+          : (
+            <>
+            <li>
+              <Link to="/login">
                 <span className="mx-4 opacity-80 transition-opacity hover:opacity-100">
-                  Sign in
+                  Sign-in
                 </span>
               </Link>
             </li>
             <li>
-              <Link to="/">
+              <Link to="/register">
                 <span className="mx-4 opacity-80 transition-opacity hover:opacity-100">
                   Register
                 </span>
               </Link>
             </li>
+            </>
+            )
+          }
           </ul>
         </div>
         <div className="dropdown dropdown-end">
@@ -64,20 +96,39 @@ export const Navbar = () => {
                 </span>
               </Link>
             </li>
+            {user ? (
+              <>
+          <li> 
+            <Link to="/profile">
+            <span className="mx-4 opacity-80 transition-opacity hover:opacity-100">
+                  My Account
+                </span>
+            </Link>
+            </li>
             <li>
-              <Link to="/">
+            <span className="mx-4 opacity-80 transition-opacity hover:opacity-100" onClick={handleLogout}>Log out</span>
+          </li> 
+          </> 
+          )
+          : (
+            <>
+            <li>
+              <Link to="/login">
                 <span className="mx-4 opacity-80 transition-opacity hover:opacity-100">
-                  Sign in
+                  Sign-in
                 </span>
               </Link>
             </li>
             <li>
-              <Link to="/">
+              <Link to="/register">
                 <span className="mx-4 opacity-80 transition-opacity hover:opacity-100">
                   Register
                 </span>
               </Link>
             </li>
+            </>
+            )
+          }
           </ul>
         </div>
       </div>

@@ -5,9 +5,11 @@ export const TermsandConditions = () => {
   return (
     <div>
       <Navbar />
-      <h1 className="text-5xl font-bold mt-12 text-center">Terms and Conditions</h1>
-      <div className="text-center w-1/2 mx-auto m-12">
-        <p className="my-4">
+      <h1 className="text-4xl md:text-5xl font-bold mt-12 text-center w-4/5 mx-auto">
+        Terms and Conditions
+      </h1>
+      <div className="text-justify w-3/4 md:w-1/2 mx-auto m-12 text-sm">
+        <p className="mb-4">
           Enim veniam sint irure non. Anim occaecat adipisicing nostrud nisi
           laboris cillum aute. Aliquip occaecat amet nisi fugiat.
         </p>
@@ -38,7 +40,10 @@ export const TermsandConditions = () => {
           excepteur. Excepteur exercitation laboris pariatur ullamco eiusmod
           esse fugiat aute adipisicing qui nisi.
         </p>
-        <p className="my-4">Dolor culpa duis magna veniam culpa sint sunt id fugiat cillum occaecat.</p>
+        <p className="my-4">
+          Dolor culpa duis magna veniam culpa sint sunt id fugiat cillum
+          occaecat.
+        </p>
       </div>
       <Footer />
     </div>
