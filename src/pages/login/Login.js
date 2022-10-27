@@ -7,6 +7,7 @@ import { TextField } from "../../components/textField/TextField";
 import { auth, db } from "../../firebase-config";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { updateDoc, doc } from "firebase/firestore";
+import swal from "sweetalert";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -31,6 +32,17 @@ export const Login = () => {
       });
       navigate("/");
     } catch (err) {
+      if (err.code === "auth/wrong-password") {
+        swal(
+          "Oops! You have entered an incorrect password",
+          "Try again",
+          "error"
+        );
+      } else if (err.code === "auth/user-not-found") {
+        swal("Oops! This user doesn't exist", "Try again", "error");
+      }else if(err.code === "auth/too-many-requests"){
+        swal("Oops! Too many wrong attempts", "You can reset your password or Try again later", "error");
+      }
       console.log(err);
     }
   };

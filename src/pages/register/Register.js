@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Footer, Navbar } from "../../components";
 import { Formik, Form } from "formik";
@@ -6,10 +6,21 @@ import * as Yup from "yup";
 import { TextField } from "../../components/textField/TextField";
 import { auth, db } from "../../firebase-config";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { setDoc, doc } from "firebase/firestore";
+import { setDoc, getDocs, doc, collection } from "firebase/firestore";
+import swal from "sweetalert";
 
 export const Register = () => {
+  const [users, setUsers] = useState([]);
+  const usersCollectionRef = collection(db, "users");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const getUsers = async () => {
+      const data = await getDocs(usersCollectionRef);
+      setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
+    getUsers();
+  }, []);
 
   const validate = Yup.object({
     username: Yup.string()
@@ -27,26 +38,41 @@ export const Register = () => {
   });
 
   const handleSubmit = async (values) => {
-    try {
-      const result = await createUserWithEmailAndPassword(
-        auth,
-        values.email,
-        values.password
-      );
-      const newUser = {
-        uid: result.user.uid,
-        username: values.username,
-        email: values.email,
-        password: values.password,
-        profilePicture: "",
-        isLoggedIn: false,
-      };
+    const findByUsername = users.find(
+      (item) => item.username === values.username
+    );
 
-      console.log(newUser);
-      await setDoc(doc(db, "users", result.user.uid), newUser);
-      navigate("/login");
-    } catch (err) {
-      console.log(err);
+    if (findByUsername) {
+      swal(
+        "Looks like this username is already in use",
+        "Try another one",
+        "warning"
+      );
+    } else {
+      try {
+        const result = await createUserWithEmailAndPassword(
+          auth,
+          values.email,
+          values.password
+        );
+        const newUser = {
+          uid: result.user.uid,
+          username: values.username,
+          email: values.email,
+          password: values.password,
+          profilePicture: "",
+          isLoggedIn: false,
+        };
+        await setDoc(doc(db, "users", result.user.uid), newUser);
+        navigate("/login");
+      } catch (err) {
+        swal(
+          "Looks like this email address is already in use",
+          "Try another one",
+          "warning"
+        );
+        console.log(err);
+      }
     }
   };
 
@@ -76,7 +102,7 @@ export const Register = () => {
               name="confirmPassword"
               type="password"
             />
-            <button className="btn btn-primary w-full mt-2">Register</button>
+            <button className="btn btn-primary w-full mt-2" type="submit">Register</button>
 
             <p className="mt-5 flex justify-between font-light">
               Already have an account?

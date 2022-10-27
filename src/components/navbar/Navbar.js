@@ -102,7 +102,7 @@ export const Navbar = () => {
             {user ? (
               <>
                 <li>
-                  <Link to="/profile">
+                  <Link to="/dashboard">
                     <span className="mx-4 opacity-80 transition-opacity hover:opacity-100">
                       My Account
                     </span>

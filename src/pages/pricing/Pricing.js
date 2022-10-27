@@ -12,7 +12,7 @@ export const Pricing = () => {
           later for the most advanced features.
         </p>
       </div>
-      <div className="mb-16 md:my-16">
+      <div className="mb-16 mt-4 md:my-16">
         <PricingTables />
       </div>
       <Footer />
