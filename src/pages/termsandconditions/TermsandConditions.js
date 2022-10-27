@@ -1,7 +1,7 @@
 import React from "react";
 import { Footer, Navbar } from "../../components";
 
-export const TermsandConditions = () => {
+export const TermsAndConditions = () => {
   return (
     <div>
       <Navbar />

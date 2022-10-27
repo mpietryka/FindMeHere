@@ -1,7 +1,7 @@
 import React from "react";
 import { Footer, Navbar, Hero } from "../../components";
 
-export const Landingpage = () => {
+export const LandingPage = () => {
   return (
     <div className="min-h-screen">
       <Navbar />

@@ -1,5 +1,5 @@
 import React from "react";
-import { Footer, Navbar, Pricingtables } from "../../components";
+import { Footer, Navbar, PricingTables } from "../../components";
 
 export const Pricing = () => {
   return (
@@ -13,7 +13,7 @@ export const Pricing = () => {
         </p>
       </div>
       <div className="mb-16 md:my-16">
-        <Pricingtables />
+        <PricingTables />
       </div>
       <Footer />
     </div>

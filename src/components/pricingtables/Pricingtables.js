@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Pricingtables = () => {
+export const PricingTables = () => {
   return (
     <div className="flex flex-col w-3/4 mx-auto lg:flex-row">
       <div className="grid flex-grow card bg-base-300 rounded-box ">

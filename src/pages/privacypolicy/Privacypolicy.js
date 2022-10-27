@@ -1,7 +1,7 @@
 import React from "react";
 import { Footer, Navbar } from "../../components";
 
-export const Privacypolicy = () => {
+export const PrivacyPolicy = () => {
   return (
     <div>
       <Navbar />

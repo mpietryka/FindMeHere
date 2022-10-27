@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { Landingpage } from "./pages/landingpage/Landingpage";
-import { Privacypolicy } from "./pages/privacypolicy/Privacypolicy";
+import { LandingPage } from "./pages/landingPage/LandingPage";
+import { PrivacyPolicy } from "./pages/privacyPolicy/PrivacyPolicy";
 import { Pricing } from "./pages/pricing/Pricing";
-import { TermsandConditions } from "./pages/termsandconditions/TermsandConditions";
+import { TermsAndConditions } from "./pages/termsAndConditions/TermsAndConditions";
 import { Register } from "./pages/register/Register";
 import { Login } from "./pages/login/Login";
 import { Dashboard } from "./pages/dashboard/Dashboard";
@@ -15,10 +15,10 @@ export const App = () => {
     <AuthProvider>
       <Router>
         <Routes>
-          <Route exact path="/" element={<Landingpage />} />
+          <Route exact path="/" element={<LandingPage />} />
           <Route exact path="/pricing" element={<Pricing />} />
-          <Route path="/privacypolicy" element={<Privacypolicy />} />
-          <Route path="/termsandconditions" element={<TermsandConditions />} />
+          <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+          <Route path="/termsandconditions" element={<TermsAndConditions />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route element={<PrivateRoutes />}>
