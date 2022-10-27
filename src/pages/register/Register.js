@@ -20,7 +20,7 @@ export const Register = () => {
       setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
     getUsers();
-  }, []);
+  },);
 
   const validate = Yup.object({
     username: Yup.string()
@@ -45,8 +45,8 @@ export const Register = () => {
     if (findByUsername) {
       swal(
         "Looks like this username is already in use",
-        "Try another one",
-        "warning"
+       "Try another one",
+       "warning"
       );
     } else {
       try {
@@ -66,11 +66,13 @@ export const Register = () => {
         await setDoc(doc(db, "users", result.user.uid), newUser);
         navigate("/login");
       } catch (err) {
-        swal(
+        if(err.code === "auth/email-already-in-use"){
+          swal(
           "Looks like this email address is already in use",
           "Try another one",
           "warning"
-        );
+          );
+          }
         console.log(err);
       }
     }

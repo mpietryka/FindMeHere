@@ -16,7 +16,7 @@ export const Dashboard = () => {
       setCurrentUser(docSnap.data());
     };
     getUser();
-  }, []);
+  },);
 
   return (
     <div>
