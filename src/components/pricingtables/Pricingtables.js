@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export const PricingTables = () => {
   return (
@@ -112,7 +113,9 @@ export const PricingTables = () => {
           <span>Statistics</span>
         </div>
         <div className="mx-auto my-5">
-          <button className="btn btn-primary">Register</button>
+          <Link to="/register">
+            <span className="btn btn-primary">Register</span>
+          </Link>
         </div>
       </div>
       <div className="divider lg:divider-horizontal">OR</div>
@@ -223,7 +226,9 @@ export const PricingTables = () => {
           <span>Statistics</span>
         </div>
         <div className="mx-auto my-5">
-          <button className="btn btn-primary">Register</button>
+          <Link to="/register">
+            <span className="btn btn-primary">Register</span>
+          </Link>
         </div>
       </div>
     </div>

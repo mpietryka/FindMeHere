@@ -30,7 +30,7 @@ export const Login = () => {
       await updateDoc(doc(db, "users", result.user.uid), {
         isLoggedIn: true,
       });
-      navigate("/");
+      navigate("/dashboard");
     } catch (err) {
       if (err.code === "auth/wrong-password") {
         swal(
@@ -40,8 +40,12 @@ export const Login = () => {
         );
       } else if (err.code === "auth/user-not-found") {
         swal("Oops! This user doesn't exist", "Try again", "error");
-      }else if(err.code === "auth/too-many-requests"){
-        swal("Oops! Too many wrong attempts", "You can reset your password or Try again later", "error");
+      } else if (err.code === "auth/too-many-requests") {
+        swal(
+          "Oops! Too many wrong attempts",
+          "You can reset your password or Try again later",
+          "error"
+        );
       }
       console.log(err);
     }
@@ -50,7 +54,7 @@ export const Login = () => {
   return (
     <div>
       <Navbar />
-      <div className="w-11/12 md:w-1/3 my-16 mx-auto border-2 shadow-lg border-base-200 rounded-md p-6">
+      <div className="w-11/12 md:w-1/3 my-16 mx-auto border-2 shadow-lg border-base-200 rounded-md p-6 bg-base-300">
         <Formik
           initialValues={{
             email: "",

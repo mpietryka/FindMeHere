@@ -19,7 +19,7 @@ export const TextField = ({ label, ...props }) => {
         {...props}
         autoComplete="off"
       />
-      <ErrorMessage name={field.name} />
+      <ErrorMessage className="text-red-500 " name={field.name} />
     </div>
   );
 };

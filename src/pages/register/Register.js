@@ -20,7 +20,7 @@ export const Register = () => {
       setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
     getUsers();
-  },);
+  });
 
   const validate = Yup.object({
     username: Yup.string()
@@ -45,8 +45,8 @@ export const Register = () => {
     if (findByUsername) {
       swal(
         "Looks like this username is already in use",
-       "Try another one",
-       "warning"
+        "Try another one",
+        "warning"
       );
     } else {
       try {
@@ -64,14 +64,14 @@ export const Register = () => {
           isLoggedIn: false,
         };
         await setDoc(doc(db, "users", result.user.uid), newUser);
-        navigate("/login");
+        navigate("/dashboard");
       } catch (err) {
-        if(err.code === "auth/email-already-in-use"){
+        if (err.code === "auth/email-already-in-use") {
           swal(
-          "Looks like this email address is already in use",
-          "Try another one",
-          "warning"
-          );
+            "Looks like this email address is already in use",
+            "Try another one",
+            "warning"
+            );
           }
         console.log(err);
       }
@@ -104,7 +104,9 @@ export const Register = () => {
               name="confirmPassword"
               type="password"
             />
-            <button className="btn btn-primary w-full mt-2" type="submit">Register</button>
+            <button className="btn btn-primary w-full mt-2" type="submit">
+              Register
+            </button>
 
             <p className="mt-5 flex justify-between font-light">
               Already have an account?

@@ -6,7 +6,10 @@ import { Loading } from "../pages/loading/Loading";
 export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({
+    user: null,
+    isLoggedIn : false}
+    );
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -15,6 +18,7 @@ const AuthProvider = ({ children }) => {
       setLoading(false);
     });
   }, []);
+  
   if (loading) {
     return <Loading />;
   }
