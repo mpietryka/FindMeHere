@@ -25,7 +25,8 @@ const linkAdded = () => {
     position: toast.POSITION.TOP_RIGHT,
     draggable: true,
     theme : "dark",
-    autoClose: 2500,
+    autoClose: 1500,
+    hideProgressBar: true,
   });
 }
 
@@ -34,7 +35,8 @@ const linkRemoved = () => {
     position: toast.POSITION.TOP_RIGHT,
     draggable: true,
     theme : "dark",
-    autoClose: 2500,
+    autoClose: 1500,
+    hideProgressBar: true,
   });
 }
 
@@ -79,7 +81,7 @@ export const Dashboard = () => {
       {
         uid: "",
         platform: values.platform,
-        link: values.link,
+        link: "https://" + values.link,
       }
     );
     await updateDoc(newLink, {
@@ -120,7 +122,9 @@ export const Dashboard = () => {
         <AddLinkForm addLink={addLink} />
       </div>
       <Footer />
-      <ToastContainer/>
+      <ToastContainer
+      pauseOnFocusLoss={false}
+      />
     </div>
   );
 };

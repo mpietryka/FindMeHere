@@ -7,8 +7,8 @@ const deleteThis = () =>{
 }
 
   return (
-    <div className="mx-auto w-1/2 flex flex-row p-2">
-      <button className="btn btn-primary btn-circle mt-1 cursor-auto no-animation">
+    <div className="mx-auto w-11/12 lg:w-1/2 flex flex-row p-2">
+      <button className="btn btn-primary btn-active btn-circle mt-1 cursor-auto no-animation">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -24,15 +24,16 @@ const deleteThis = () =>{
           />
         </svg>
       </button>
-
+      
       <a
-        href={link.link}
-        className="w-full bg-gray-300 text-black font-bold rounded-md mx-1 p-3 text-center"
+        href={link.link} target="_blank" rel="noopener noreferrer" data-tip={link.link}
+        className="w-full bg-gray-300 text-black font-bold rounded-md mx-1 p-3 text-center tooltip tooltip-bottom"
       >
         {link.platform}
       </a>
 
-      <button className="btn btn-primary btn-circle mt-1" onClick={deleteThis}>
+
+      <button className="btn btn-primary btn-circle mt-1 " onClick={deleteThis}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

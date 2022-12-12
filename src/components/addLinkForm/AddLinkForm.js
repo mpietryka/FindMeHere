@@ -13,6 +13,7 @@ export const AddLinkForm = ({ addLink }) => {
         platform: "",
         link: "",
       }}
+
       validationSchema={validate}
       onSubmit={(values) => {
         if (values.platform === "") {
@@ -23,10 +24,7 @@ export const AddLinkForm = ({ addLink }) => {
       }}
     >
       <Form>
-        <div className="mx-auto flex flex-row w-1/2 p-2">
-          {/*
-        <div className="pt-4 mx-auto w-1/2 flex flex-row items-center justify-between">
-        */}
+        <div className="mx-auto flex flex-row w-11/12 lg:w-1/2 p-2">
           <Field
             as="select"
             name="platform"
@@ -35,15 +33,15 @@ export const AddLinkForm = ({ addLink }) => {
             <option value="" disabled>
               Platform
             </option>
-            <option value="instagram">Instagram</option>
-            <option value="twitter">Twiiter</option>
-            <option value="tiktok">TikTok</option>
-            <option value="linkedin">LinkedIn</option>
-            <option value="github">GitHub</option>
-            <option value="researchgate">ResearchGate</option>
-            <option value="spotify">Spotify</option>
-            <option value="applemusic">Apple Music</option>
-            <option value="other">Other</option>
+            <option value="Instagram">Instagram</option>
+            <option value="Twitter">Twiiter</option>
+            <option value="TikTok">TikTok</option>
+            <option value="LinkedIn">LinkedIn</option>
+            <option value="GitHub">GitHub</option>
+            <option value="ResearchGate">ResearchGate</option>
+            <option value="Spotify">Spotify</option>
+            <option value="Apple Music">Apple Music</option>
+            <option value="Other">Other</option>
           </Field>
           <Field
             className="m-1 h-5 w-full rounded-md border border-gray-400 px-3 py-5 transition 
@@ -54,12 +52,15 @@ export const AddLinkForm = ({ addLink }) => {
             type="text"
             autoComplete="off"
           />
-          <button type="submit" className="btn rounded-md">
+          <button type="submit" className="hidden md:block btn rounded-md">
             Add Link
           </button>
-          {/*
+          <button type="submit" className=" md:hidden btn rounded-md">
+            Add
+          </button>
+
         </div>
-    */}
+        <div className="text-center text-error">
           <ErrorMessage name="link" />
         </div>
       </Form>
