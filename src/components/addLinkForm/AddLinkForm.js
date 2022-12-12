@@ -3,6 +3,7 @@ import React from "react";
 import * as Yup from "yup";
 
 export const AddLinkForm = ({ addLink }) => {
+
   const validate = Yup.object({
     link: Yup.string().required("Please enter your URL"),
   });
@@ -13,7 +14,6 @@ export const AddLinkForm = ({ addLink }) => {
         platform: "",
         link: "",
       }}
-
       validationSchema={validate}
       onSubmit={(values) => {
         if (values.platform === "") {

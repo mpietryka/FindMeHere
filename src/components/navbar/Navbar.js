@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth, db } from "../../firebase-config";
 import { signOut } from "firebase/auth";

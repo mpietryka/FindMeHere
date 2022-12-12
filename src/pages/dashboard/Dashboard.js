@@ -76,18 +76,33 @@ export const Dashboard = () => {
   }, []);
 
   const addLink = async (values) => {
-    const newLink = await addDoc(
+    let link = values.link
+    let newLink 
+    if(link.slice(0, 8) === "https://"){
+    newLink = await addDoc(
+      collection(db, "users", currentUser.uid, "links"),
+      {
+        uid: "",
+        platform: values.platform,
+        link: values.link,
+      }
+      );
+    }else{
+      newLink = await addDoc(
       collection(db, "users", currentUser.uid, "links"),
       {
         uid: "",
         platform: values.platform,
         link: "https://" + values.link,
       }
-    );
+      );
+    }
+ 
     await updateDoc(newLink, {
       uid: newLink.id,
     });
     linkAdded()
+
     console.log(values);
   };
 
