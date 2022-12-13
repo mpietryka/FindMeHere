@@ -15,11 +15,12 @@ export const AddLinkForm = ({ addLink }) => {
         link: "",
       }}
       validationSchema={validate}
-      onSubmit={(values) => {
+      onSubmit={(values, {resetForm}) => {
         if (values.platform === "") {
           console.log("invalid");
         } else {
           addLink(values);
+          resetForm({values: ''})
         }
       }}
     >
