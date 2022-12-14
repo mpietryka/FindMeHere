@@ -29,7 +29,7 @@ export const AddLinkForm = ({ addLink }) => {
           <Field
             as="select"
             name="platform"
-            className="select bg-neutral w-1/4 rounded-md"
+            className="select bg-neutral w-1/3 md:w-1/4 rounded-md"
           >
             <option value="" disabled>
               Platform

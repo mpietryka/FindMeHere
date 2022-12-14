@@ -19,6 +19,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { db } from "../../firebase-config";
 import avatar from "./generic-avatar-1.png";
+import { ProfilePicture } from "../../components/profilePicture/ProfilePicture";
 
 const linkAdded = () => {
   toast.success("Link Added !", {
@@ -60,14 +61,11 @@ export const Dashboard = () => {
       const linkRef = collection(db, "users", uid, "links");
       const q = query(linkRef);
 
-      //retrieve chat messages in real time
       onSnapshot(q, (querySnapshot) => {
         let links = [];
-        //populate the temporary msgs array with the data from the database
         querySnapshot.forEach((doc) => {
           links.push(doc.data());
         });
-        //assign temporary array to the main msgs state
         setLinks(links);
       });
       console.log(links);
@@ -118,15 +116,17 @@ export const Dashboard = () => {
       <Navbar />
       <div className="text-center mx-auto">
         {currentUser ? (
-          <h1 className="text-5xl mb-6 font-bold"> {currentUser.username}</h1>
+          <h1 className="text-5xl my-6 font-bold"> {currentUser.username}</h1>
         ) : (
           <Loading />
         )}
-        <img
-          className="mx-auto rounded-full object-cover h-64 w-64 lg:h-72 lg:w-72 mask mask-circle"
-          src={avatar}
-          alt="profilePic"
-        />
+        {currentUser ? (
+          <ProfilePicture 
+          currentUser={currentUser}
+          avatar={avatar}
+          />
+         ) : ( <Loading/> )}
+
       </div>
       <div className="mb-16">
         {links.length

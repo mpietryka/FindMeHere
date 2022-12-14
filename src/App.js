@@ -7,6 +7,7 @@ import { TermsAndConditions } from "./pages/termsAndConditions/TermsAndCondition
 import { Register } from "./pages/register/Register";
 import { Login } from "./pages/login/Login";
 import { Dashboard } from "./pages/dashboard/Dashboard";
+import { UpdateProfile } from "./pages/settings/UpdateProfile"
 import AuthProvider from "./context/auth";
 import PrivateRoutes from "./components/privateRoutes/PrivateRoutes";
 
@@ -23,6 +24,7 @@ export const App = () => {
           <Route path="/login" element={<Login />} />
           <Route element={<PrivateRoutes />}>
             <Route element={<Dashboard />} path="/dashboard" />
+            <Route element={<UpdateProfile />} path="/updateProfile" />
             {/* Protected routes have to go here */}
           </Route>
         </Routes>

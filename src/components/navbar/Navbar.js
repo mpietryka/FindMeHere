@@ -20,7 +20,7 @@ export const Navbar = () => {
   };
 
   return (
-    <div className="navbar bg-base-200">
+    <div className="navbar bg-base-300">
       <div className="navbar-start">
         <Link to="/">
           <span className="btn btn-ghost normal-case text-xl">FindMeHere</span>
@@ -82,7 +82,7 @@ export const Navbar = () => {
                           </Link>
                         </li>
                         <li>
-                          <Link className="w-full rounded-md" to="/settings">
+                          <Link className="w-full rounded-md" to="/updateProfile">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               fill="none"
@@ -173,6 +173,20 @@ export const Navbar = () => {
                   <Link to="/dashboard">
                     <span className="mx-4 opacity-80 transition-opacity hover:opacity-100">
                       My Account
+                    </span>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/updateprofile">
+                    <span className="mx-4 opacity-80 transition-opacity hover:opacity-100">
+                      Settings
+                    </span>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/statistics">
+                    <span className="mx-4 opacity-80 transition-opacity hover:opacity-100">
+                      Statistics
                     </span>
                   </Link>
                 </li>
