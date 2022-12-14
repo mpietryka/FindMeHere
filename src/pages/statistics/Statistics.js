@@ -6,8 +6,8 @@ export const Statistics = () => {
     <div>
       <Navbar />
       <div className="text-center text-2xl">
-      <div>Statistics Here</div>
-      <div>Charts and graphs here</div>
+        <div>Statistics Here</div>
+        <div>Charts and graphs here</div>
       </div>
       <Footer />
     </div>

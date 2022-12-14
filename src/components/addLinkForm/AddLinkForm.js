@@ -3,7 +3,6 @@ import React from "react";
 import * as Yup from "yup";
 
 export const AddLinkForm = ({ addLink }) => {
-
   const validate = Yup.object({
     link: Yup.string().required("Please enter your URL"),
   });
@@ -15,12 +14,12 @@ export const AddLinkForm = ({ addLink }) => {
         link: "",
       }}
       validationSchema={validate}
-      onSubmit={(values, {resetForm}) => {
+      onSubmit={(values, { resetForm }) => {
         if (values.platform === "") {
           console.log("invalid");
         } else {
           addLink(values);
-          resetForm({values: ''})
+          resetForm({ values: "" });
         }
       }}
     >
@@ -59,7 +58,6 @@ export const AddLinkForm = ({ addLink }) => {
           <button type="submit" className=" md:hidden btn rounded-md">
             Add
           </button>
-
         </div>
         <div className="text-center text-error font-bold">
           <ErrorMessage name="link" />

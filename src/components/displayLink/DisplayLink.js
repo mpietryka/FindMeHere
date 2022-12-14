@@ -1,10 +1,9 @@
 import React from "react";
 
 export const DisplayLink = ({ link, deleteLink }) => {
- 
-const deleteThis = () =>{
-    deleteLink(link.uid)
-}
+  const deleteThis = () => {
+    deleteLink(link.uid);
+  };
 
   return (
     <div className="mx-auto w-11/12 lg:w-1/2 flex flex-row p-2">
@@ -24,31 +23,37 @@ const deleteThis = () =>{
           />
         </svg>
       </button>
-      
+
       <a
-        href={link.link} target="_blank" rel="noopener noreferrer" data-tip={link.link}
+        href={link.link}
+        target="_blank"
+        rel="noopener noreferrer"
+        data-tip={link.link}
         className="w-full bg-gray-300 text-black font-bold rounded-md mx-1 p-3 text-center tooltip tooltip-top "
       >
         {link.platform}
       </a>
 
-<div className="tooltip tooltip-top" data-tip="Delete Link">
-      <button className="btn btn-primary btn-circle mt-1 " onClick={deleteThis}>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="w-6 h-6"
+      <div className="tooltip tooltip-top" data-tip="Delete Link">
+        <button
+          className="btn btn-primary btn-circle mt-1 "
+          onClick={deleteThis}
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M6 18L18 6M6 6l12 12"
-          />
-        </svg>
-      </button>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
       </div>
     </div>
   );

@@ -12,9 +12,9 @@ import {
   onSnapshot,
   addDoc,
   updateDoc,
-  deleteDoc
+  deleteDoc,
 } from "firebase/firestore";
-import { toast, ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { db } from "../../firebase-config";
@@ -25,21 +25,21 @@ const linkAdded = () => {
   toast.success("Link Added !", {
     position: toast.POSITION.TOP_RIGHT,
     draggable: true,
-    theme : "dark",
+    theme: "dark",
     autoClose: 1500,
     hideProgressBar: true,
   });
-}
+};
 
 const linkRemoved = () => {
   toast.success("Link Removed !", {
     position: toast.POSITION.TOP_RIGHT,
     draggable: true,
-    theme : "dark",
+    theme: "dark",
     autoClose: 1500,
     hideProgressBar: true,
   });
-}
+};
 
 export const Dashboard = () => {
   const { user } = useContext(AuthContext);
@@ -74,32 +74,32 @@ export const Dashboard = () => {
   }, []);
 
   const addLink = async (values) => {
-    let link = values.link
-    let newLink 
-    if(link.slice(0, 8) === "https://"){
-    newLink = await addDoc(
-      collection(db, "users", currentUser.uid, "links"),
-      {
-        uid: "",
-        platform: values.platform,
-        link: values.link,
-      }
-      );
-    }else{
+    let link = values.link;
+    let newLink;
+    if (link.slice(0, 8) === "https://") {
       newLink = await addDoc(
-      collection(db, "users", currentUser.uid, "links"),
-      {
-        uid: "",
-        platform: values.platform,
-        link: "https://" + values.link,
-      }
+        collection(db, "users", currentUser.uid, "links"),
+        {
+          uid: "",
+          platform: values.platform,
+          link: values.link,
+        }
+      );
+    } else {
+      newLink = await addDoc(
+        collection(db, "users", currentUser.uid, "links"),
+        {
+          uid: "",
+          platform: values.platform,
+          link: "https://" + values.link,
+        }
       );
     }
- 
+
     await updateDoc(newLink, {
       uid: newLink.id,
     });
-    linkAdded()
+    linkAdded();
 
     console.log(values);
   };
@@ -108,7 +108,7 @@ export const Dashboard = () => {
     const linkRef = doc(db, "users", currentUser.uid, "links", linkID);
 
     await deleteDoc(linkRef);
-    linkRemoved()
+    linkRemoved();
   };
 
   return (
@@ -121,12 +121,10 @@ export const Dashboard = () => {
           <Loading />
         )}
         {currentUser ? (
-          <ProfilePicture 
-          currentUser={currentUser}
-          avatar={avatar}
-          />
-         ) : ( <Loading/> )}
-
+          <ProfilePicture currentUser={currentUser} avatar={avatar} />
+        ) : (
+          <Loading />
+        )}
       </div>
       <div className="mb-16">
         {links.length
@@ -137,9 +135,7 @@ export const Dashboard = () => {
         <AddLinkForm addLink={addLink} />
       </div>
       <Footer />
-      <ToastContainer
-      pauseOnFocusLoss={false}
-      />
+      <ToastContainer pauseOnFocusLoss={false} />
     </div>
   );
 };

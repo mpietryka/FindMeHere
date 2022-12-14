@@ -20,7 +20,7 @@ export const Register = () => {
       setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
     getUsers();
-  });
+  }, []);
 
   const validate = Yup.object({
     username: Yup.string()
@@ -71,8 +71,8 @@ export const Register = () => {
             "Looks like this email address is already in use",
             "Try another one",
             "warning"
-            );
-          }
+          );
+        }
         console.log(err);
       }
     }

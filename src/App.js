@@ -7,8 +7,9 @@ import { TermsAndConditions } from "./pages/termsAndConditions/TermsAndCondition
 import { Register } from "./pages/register/Register";
 import { Login } from "./pages/login/Login";
 import { Dashboard } from "./pages/dashboard/Dashboard";
-import { UpdateProfile } from "./pages/settings/UpdateProfile"
-import { Statistics } from "./pages/statistics/Statistics"
+import { UpdateProfile } from "./pages/settings/UpdateProfile";
+import { Statistics } from "./pages/statistics/Statistics";
+import { UserDetail } from "./pages/userDetails/UserDetail";
 import AuthProvider from "./context/auth";
 import PrivateRoutes from "./components/privateRoutes/PrivateRoutes";
 
@@ -23,6 +24,7 @@ export const App = () => {
           <Route path="/termsandconditions" element={<TermsAndConditions />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/:username" element={<UserDetail />} />
           <Route element={<PrivateRoutes />}>
             <Route element={<Dashboard />} path="/dashboard" />
             <Route element={<UpdateProfile />} path="/updateProfile" />

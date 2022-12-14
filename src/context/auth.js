@@ -8,8 +8,8 @@ export const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({
     user: null,
-    isLoggedIn : false}
-    );
+    isLoggedIn: false,
+  });
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -18,7 +18,7 @@ const AuthProvider = ({ children }) => {
       setLoading(false);
     });
   }, []);
-  
+
   if (loading) {
     return <Loading />;
   }
