@@ -8,6 +8,7 @@ import { Register } from "./pages/register/Register";
 import { Login } from "./pages/login/Login";
 import { Dashboard } from "./pages/dashboard/Dashboard";
 import { UpdateProfile } from "./pages/settings/UpdateProfile"
+import { Statistics } from "./pages/statistics/Statistics"
 import AuthProvider from "./context/auth";
 import PrivateRoutes from "./components/privateRoutes/PrivateRoutes";
 
@@ -25,6 +26,7 @@ export const App = () => {
           <Route element={<PrivateRoutes />}>
             <Route element={<Dashboard />} path="/dashboard" />
             <Route element={<UpdateProfile />} path="/updateProfile" />
+            <Route element={<Statistics />} path="/statistics" />
             {/* Protected routes have to go here */}
           </Route>
         </Routes>

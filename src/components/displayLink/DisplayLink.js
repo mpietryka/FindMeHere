@@ -27,12 +27,12 @@ const deleteThis = () =>{
       
       <a
         href={link.link} target="_blank" rel="noopener noreferrer" data-tip={link.link}
-        className="w-full bg-gray-300 text-black font-bold rounded-md mx-1 p-3 text-center tooltip tooltip-bottom"
+        className="w-full bg-gray-300 text-black font-bold rounded-md mx-1 p-3 text-center tooltip tooltip-top "
       >
         {link.platform}
       </a>
 
-
+<div className="tooltip tooltip-top" data-tip="Delete Link">
       <button className="btn btn-primary btn-circle mt-1 " onClick={deleteThis}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -49,6 +49,7 @@ const deleteThis = () =>{
           />
         </svg>
       </button>
+      </div>
     </div>
   );
 };
