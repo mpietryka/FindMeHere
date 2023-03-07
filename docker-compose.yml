@@ -1,0 +1,9 @@
+version: "3"
+services:
+  findmehere:
+    build:
+      dockerfile: ./Dockerfile
+    ports:
+      - "3000:3000"
+    container_name: findmehereapp
+    stdin_open: true
