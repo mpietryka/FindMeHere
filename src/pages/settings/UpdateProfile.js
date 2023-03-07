@@ -32,6 +32,7 @@ export const UpdateProfile = () => {
       setCurrentUser(docSnap.data());
     };
     getUser();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleImageChange = (e) => {
