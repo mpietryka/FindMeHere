@@ -6,7 +6,7 @@ export const Hero = () => {
     <div className="my-12">
       <div className="hero bg-base-100 ">
         <div className="hero-content text-center">
-          <div className="w-1/2">
+          <div className="w-11/12 md:w-1/2">
             <h1 className="text-5xl font-bold">Hello there!</h1>
             <p className="pt-6 pb-4">
               Looking for a tool that could keep links to all your social
