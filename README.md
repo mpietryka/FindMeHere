@@ -8,7 +8,7 @@ It provides users with a single link that can be placed in their social media bi
 ## To run on your local environment: ##
 
 • clone the repo  
-• run **npm install**  
+• **npm install**  
 • **npm start**  
   
 or **docker-compose up** to run it with docker instead
