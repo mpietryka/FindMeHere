@@ -2,9 +2,11 @@
 
 To run on your local environment
 
-" • clone the repo "
-" • run npm install "
-" • npm start "
+• clone the repo  
+• run npm install  
+• npm start  
+  
+or docker-compose up
 
 ## or ##
 
