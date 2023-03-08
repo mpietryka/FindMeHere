@@ -15,7 +15,7 @@ or **docker-compose up** to run it with docker instead
 
 ## or ##
 
-Try it out on: https://fastidious-basbousa-110857.netlify.app/
+Try it out on: http://findmehere.net/
 
 
 # This app is built with #
