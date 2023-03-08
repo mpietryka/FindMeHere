@@ -29,7 +29,7 @@ export const Share = ({ copied, currentUser }) => {
               type="text"
               className="mt-2 mx-1 h-4 w-3/5 rounded-md border border-gray-400 px-3 py-6 transition 
     ease-in-out text-black bg-gray-300 hover:outline-none focus:outline-none focus:ring-2 focus:ring-primary"
-              value={"localhost:3000/" + username}
+              value={"findmehere.net/" + username}
               readOnly
             />
             <button onClick={copyURL} className="btn btn-primary rounded-lg">
@@ -38,7 +38,7 @@ export const Share = ({ copied, currentUser }) => {
 
             <div className="flex justify-center my-4 w-full mx-auto">
               <QRCodeSVG
-                value={"localhost:3000/" + username}
+                value={"findmehere.net/" + username}
                 size={256}
                 fgColor={"#ffffff"}
                 bgColor={"#000000"}
