@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export const PricingTables = () => {
   return (
-    <div className="mb-24 flex flex-col w-3/4 mx-auto lg:flex-row">
+    <div className="mb-24 flex flex-col w-11/12 md:w-3/4 mx-auto lg:flex-row">
       <div className="grid flex-grow card bg-base-300 rounded-box ">
         <div className="text-3xl font-semibold p-4 text-center">Standard</div>
         <div className="text-center text-sm pb-3">Free</div>
