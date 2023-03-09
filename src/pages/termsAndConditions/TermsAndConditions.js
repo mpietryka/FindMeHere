@@ -71,14 +71,15 @@ export const TermsAndConditions = () => {
           whether written or oral, relating to the subject matter.
         </p>
         <p className="mb-4 font-bold text-xl">Contact us</p>
-        <p className="my-4 mb-24">
+        <p className="my-4">
           If you have any questions or concerns about these terms and
           conditions, please contact us
         </p>
-        <small className="text-gray-500 my-4 mb-24">
-          Please note that these terms and conditions were generated using a
-          free online tool as a placeholder only.
-        </small>
+        <p className="text-gray-500 mt-8 mb-20 text-xs">
+          <small>Please note that this privacy policy was generated using a free online
+          tool as a placeholder only.
+          </small>
+        </p>
       </div>
       <Footer />
     </div>

@@ -16,7 +16,6 @@ import {
 } from "firebase/firestore";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 import { db } from "../../firebase-config";
 import avatar from "./generic-avatar-1.png";
 import { ProfilePicture } from "../../components/profilePicture/ProfilePicture";
@@ -203,9 +202,6 @@ export const Dashboard = () => {
               Add New Link
             </h1>
             <AddLinkForm addLink={addLink} />
-
-
-            
             <div className="modal-action w-full">
               <label
                 htmlFor="my-modal-6"

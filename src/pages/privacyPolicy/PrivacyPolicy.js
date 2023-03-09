@@ -75,14 +75,15 @@ export const PrivacyPolicy = () => {
           you of any changes by posting the new policy on our website.
         </p>
         <p className="my-4 font-bold text-xl">Contact us</p>
-        <p className="my-4 mb-24">
+        <p className="my-4">
           If you have any questions or concerns about this Privacy Policy,
           please contact us.
         </p>
-        <small className="text-gray-500 my-4 mb-24">
-          Please note that this privacy policy was generated using a free online
+        <p className="text-gray-500 mt-8 mb-20 text-xs">
+          <small>Please note that this privacy policy was generated using a free online
           tool as a placeholder only.
-        </small>
+          </small>
+        </p>
       </div>
       <Footer />
     </div>
