@@ -1,4 +1,4 @@
-# FindMeHere #
+# FindMeHere (Work in progress) #
 
 FindMeHere is a digital business card web application that allows users to keep links to all your social account in one place.
 
