@@ -11,7 +11,7 @@ import { ListOfLinks } from "../../components/listOfLinks/ListOfLinks";
 
 export const UserDetail = () => {
   const [thatUser, setThatUser] = useState(null);
-  const param = useParams();
+  const {param} = useParams();
 
   useEffect(() => {
     const getOneUser = () => {

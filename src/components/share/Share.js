@@ -5,7 +5,7 @@ export const Share = ({ copied, currentUser }) => {
   let username = currentUser.username;
 
   const copyURL = () => {
-    navigator.clipboard.writeText("localhost:3000/" + username);
+    navigator.clipboard.writeText("https://findmehere.net/" + username);
     copied();
   };
 
@@ -38,7 +38,7 @@ export const Share = ({ copied, currentUser }) => {
 
             <div className="flex justify-center my-4 w-full mx-auto">
               <QRCodeSVG
-                value={"findmehere.net/" + username}
+                value={"https://findmehere.net/" + username}
                 size={256}
                 fgColor={"#ffffff"}
                 bgColor={"#000000"}
