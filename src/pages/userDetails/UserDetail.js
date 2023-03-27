@@ -17,7 +17,7 @@ export const UserDetail = () => {
     const getOneUser = () => {
       const q = query(
         collection(db, "users"),
-        where("username", "==", param.username.toLowerCase())
+        where("usernameLowerCase", "==", param.username.toLowerCase())
       );
       onSnapshot(q, (snap) => {
         if (!snap.empty) {

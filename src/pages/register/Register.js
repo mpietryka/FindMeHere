@@ -59,6 +59,7 @@ export const Register = () => {
         const newUser = {
           uid: result.user.uid,
           username: values.username,
+          usernameLowerCase: values.username.toLowerCase(),
           email: values.email,
           password: values.password,
           profilePicture: "",
