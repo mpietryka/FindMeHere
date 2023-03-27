@@ -11,6 +11,7 @@ import { ListOfLinks } from "../../components/listOfLinks/ListOfLinks";
 
 export const UserDetail = () => {
   const [thatUser, setThatUser] = useState(null);
+
   const {param} = useParams();
 
   useEffect(() => {
@@ -37,6 +38,7 @@ export const UserDetail = () => {
     <div>
       <Navbar />
       <div className="text-center mx-auto ">
+        {param.username}
         {thatUser === null ? (
           <Loading />
         ) : thatUser && thatUser.username !== "" ? (
