@@ -8,19 +8,22 @@ import { LineChart } from "../../components/lineChart/LineChart";
 import { Swipe } from "../../components/swipe/Swipe";
 import "swiper/css";
 import "swiper/css/navigation";
+import moment from "moment";
 
 export const Statistics = () => {
   const { user } = useContext(AuthContext);
   const [clicks, setClicks] = useState([]);
   const [clickCount, setClickCount] = useState([]);
   const [clicked, setClicked] = useState([]);
+  const [endDate, setEndDate] = useState(moment().subtract(7, "days"));
+  const [filteredClicks, setFilteredClicks] = useState([]);
 
   let lineChartData = {
-    labels: clicked.map((data) => data.timeStamp),
+    labels: filteredClicks.map((data) => data.timeStamp),
     datasets: [
       {
         label: "Total Clicks to date",
-        data: clicked.map((data) => data.occurrence),
+        data: filteredClicks.map((data) => data.occurrence),
       },
     ],
   };
@@ -109,6 +112,7 @@ export const Statistics = () => {
           arr2.push(a);
         }
       });
+
       let sortedClicks = arr2.sort(
         (a, b) =>
           new Date(...a.timeStamp.split("/").reverse()) -
@@ -118,6 +122,19 @@ export const Statistics = () => {
     };
     occurrencePerTimeStamp(arr, key);
   }, [clicks]);
+
+  useEffect(() => {
+    let arr = clicked;
+
+    const filterByDate = (arr) => {
+      let today = moment();
+      let arr3 = arr.filter((data) => {
+        return moment(data.timeStamp, "DD/MM/YYYY").isBetween(endDate, today);
+      });
+      setFilteredClicks(arr3);
+    };
+    filterByDate(arr);
+  }, [clicked, endDate]);
 
   return (
     <div>
@@ -131,6 +148,7 @@ export const Statistics = () => {
             <Swipe clicks={clicks} clickCount={clickCount} />
           ) : null}
         </div>
+
         {clicked ? (
           <div className="text-center text-2xl mb-20">
             <h1 className="text-2xl md:text-3xl font-bold mt-6 text-center w-4/5 mx-auto">
@@ -143,7 +161,32 @@ export const Statistics = () => {
               </div>
             </div>
             <div className="h-56 md:h-80 mx-auto w-11/12 border border-gray-50 shadow-lg mt-4 mb-16 pb-8">
-              <h1>LineChart</h1>
+              <div className="w-full flex justify-start">
+                <p className="text-sm p-3 font-semibold">Platform: </p>
+                <select className="select select-sm m-1">
+                  <option value="All">All</option>
+                </select>
+                <p className="text-sm p-3 font-semibold">Time frame: </p>
+                <select
+                  onChange={(e) => {
+                    setEndDate(e.target.value);
+                  }}
+                  className="select select-sm m-1"
+                >
+                  <option value={moment().subtract(7, "days").toDate()}>
+                    Last 7 days
+                  </option>
+                  <option value={moment().subtract(1, "month").toDate()}>
+                    Last month
+                  </option>
+                  <option value={moment().subtract(6, "months").toDate()}>
+                    Last 6 months
+                  </option>
+                  <option value={moment().subtract(1, "year").toDate()}>
+                    Last year
+                  </option>
+                </select>
+              </div>
               <LineChart chartData={lineChartData} />
             </div>
           </div>

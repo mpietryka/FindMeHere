@@ -61,7 +61,7 @@ export const Dashboard = () => {
       setCurrentUser(docSnap.data());
     };
     getUser();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -80,7 +80,7 @@ export const Dashboard = () => {
       console.log(links);
     };
     getLinks();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const addLink = async (values) => {
