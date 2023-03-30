@@ -5,7 +5,7 @@ import { StatBox } from "../statBox/StatBox";
 import "swiper/css";
 import "swiper/css/navigation";
 
-export const Swipe = ({ clicks, clickCount }) => {
+export const Swipe = ({ clicks, clicksPerPlatform }) => {
   return (
     <>
       <div className="md:hidden mx-auto w-11/12 my-4">
@@ -13,7 +13,7 @@ export const Swipe = ({ clicks, clickCount }) => {
           <SwiperSlide className="my-2">
             <StatBox name={"Total "} clicks={clicks.length} />
           </SwiperSlide>
-          {clickCount.map((click, i) => (
+          {clicksPerPlatform.map((click, i) => (
             <SwiperSlide className="my-2" key={i}>
               <StatBox name={click.platform} clicks={click.occurrence} />
             </SwiperSlide>
@@ -31,7 +31,7 @@ export const Swipe = ({ clicks, clickCount }) => {
           <SwiperSlide className="my-2">
             <StatBox name={"Total "} clicks={clicks.length} />
           </SwiperSlide>
-          {clickCount.map((click, i) => (
+          {clicksPerPlatform.map((click, i) => (
             <SwiperSlide className="my-2" key={i}>
               <StatBox name={click.platform} clicks={click.occurrence} />
             </SwiperSlide>

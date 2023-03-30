@@ -12,11 +12,21 @@ import moment from "moment";
 
 export const Statistics = () => {
   const { user } = useContext(AuthContext);
-  const [clicks, setClicks] = useState([]);
-  const [clickCount, setClickCount] = useState([]);
-  const [clicked, setClicked] = useState([]);
+  const [allClicks, setAllClicks] = useState([]);
+  const [clicksPerPlatform, setclicksPerPlatform] = useState([]);
+  const [clicksPerTimeStamp, setClicksPerTimeStamp] = useState([]);
   const [endDate, setEndDate] = useState(moment().subtract(7, "days"));
   const [filteredClicks, setFilteredClicks] = useState([]);
+  const [filteredByPlatform, setFilteredByPlatform] = useState([]);
+  const [platform, setPlatform] = useState("All");
+
+  const options = [
+    { value: moment().subtract(7, "days").toDate(), label: "Last 7 Days" },
+    { value: moment().subtract(1, "month").toDate(), label: "Last Month" },
+    { value: moment().subtract(3, "month").toDate(), label: "Last 3 Months" },
+    { value: moment().subtract(6, "month").toDate(), label: "Last 6 Months" },
+    { value: moment().subtract(1, "year").toDate(), label: "Last Year" },
+  ]
 
   let lineChartData = {
     labels: filteredClicks.map((data) => data.timeStamp),
@@ -29,11 +39,11 @@ export const Statistics = () => {
   };
 
   let barChartData = {
-    labels: clickCount.map((data) => data.platform),
+    labels: clicksPerPlatform.map((data) => data.platform),
     datasets: [
       {
         label: "Total Clicks to date",
-        data: clickCount.map((data) => data.occurrence),
+        data: clicksPerPlatform.map((data) => data.occurrence),
       },
     ],
   };
@@ -48,7 +58,7 @@ export const Statistics = () => {
         querySnapshot.forEach((doc) => {
           clicks.push(doc.data());
         });
-        setClicks(clicks);
+        setAllClicks(clicks);
       });
     };
     if (user) {
@@ -57,7 +67,7 @@ export const Statistics = () => {
   }, [user]);
 
   useEffect(() => {
-    const arr = clicks;
+    const arr = allClicks;
     const key = "platform";
 
     const occurrencePerPlatform = (arr, key) => {
@@ -81,19 +91,31 @@ export const Statistics = () => {
           arr2.push(a);
         }
       });
-
-      setClickCount(arr2);
+      setclicksPerPlatform(arr2);
     };
     occurrencePerPlatform(arr, key);
-  }, [clicks]);
+  }, [allClicks]);
 
   useEffect(() => {
-    const arr = clicks;
-    const key = "timeStamp";
+    if(platform !== "All"){
+    const filterByPlatform = (platform) => {
+      let arr = allClicks;
+      let arr3 = arr.filter((data) => {
+        return data.platform === platform;
+      });
+      setFilteredByPlatform(arr3);
+    };
+    filterByPlatform(platform);
+  }else{
+    setFilteredByPlatform(allClicks)
+  }
+  }, [allClicks, platform]);
 
+  useEffect(() => {
+    const arr = filteredByPlatform;
+    const key = "timeStamp";
     const occurrencePerTimeStamp = (arr, key) => {
       let arr2 = [];
-
       arr.forEach((x) => {
         if (
           arr2.some((val) => {
@@ -118,14 +140,14 @@ export const Statistics = () => {
           new Date(...a.timeStamp.split("/").reverse()) -
           new Date(...b.timeStamp.split("/").reverse())
       );
-      setClicked(sortedClicks);
+      setClicksPerTimeStamp(sortedClicks);
     };
     occurrencePerTimeStamp(arr, key);
-  }, [clicks]);
+  }, [allClicks, filteredByPlatform]);
 
   useEffect(() => {
-    let arr = clicked;
 
+    let arr = clicksPerTimeStamp;
     const filterByDate = (arr) => {
       let today = moment();
       let arr3 = arr.filter((data) => {
@@ -134,7 +156,7 @@ export const Statistics = () => {
       setFilteredClicks(arr3);
     };
     filterByDate(arr);
-  }, [clicked, endDate]);
+  }, [clicksPerTimeStamp, endDate]);
 
   return (
     <div>
@@ -144,12 +166,12 @@ export const Statistics = () => {
       </h1>
       <div className="text-center text-2xl">
         <div className="mx-auto w-11/12 border border-gray-50 shadow-lg mt-4 mb-8">
-          {clicks && clickCount ? (
-            <Swipe clicks={clicks} clickCount={clickCount} />
+          {allClicks && clicksPerPlatform ? (
+            <Swipe clicks={allClicks} clicksPerPlatform={clicksPerPlatform} />
           ) : null}
         </div>
 
-        {clicked ? (
+        {clicksPerTimeStamp ? (
           <div className="text-center text-2xl mb-20">
             <h1 className="text-2xl md:text-3xl font-bold mt-6 text-center w-4/5 mx-auto">
               Demo Charts Generated for the overall Statistics
@@ -163,28 +185,28 @@ export const Statistics = () => {
             <div className="h-56 md:h-80 mx-auto w-11/12 border border-gray-50 shadow-lg mt-4 mb-16 pb-8">
               <div className="w-full flex justify-start">
                 <p className="text-sm p-3 font-semibold">Platform: </p>
-                <select className="select select-sm m-1">
+                <select
+                  onChange={(e) => {
+                    setPlatform(e.target.value);
+                  }}
+                  className="select select-sm m-1"
+                >
                   <option value="All">All</option>
+                  {clicksPerPlatform.map((click, i) => (
+                      <option key={i} value={click.platform}>
+                        {click.platform}
+                      </option>
+                  ))}
                 </select>
                 <p className="text-sm p-3 font-semibold">Time frame: </p>
                 <select
                   onChange={(e) => {
                     setEndDate(e.target.value);
                   }}
-                  className="select select-sm m-1"
-                >
-                  <option value={moment().subtract(7, "days").toDate()}>
-                    Last 7 days
-                  </option>
-                  <option value={moment().subtract(1, "month").toDate()}>
-                    Last month
-                  </option>
-                  <option value={moment().subtract(6, "months").toDate()}>
-                    Last 6 months
-                  </option>
-                  <option value={moment().subtract(1, "year").toDate()}>
-                    Last year
-                  </option>
+                  className="select select-sm m-1">
+                  {options.map((option, i) => (
+                    <option key={i} value={option.value}>{option.label}</option>
+                  ))}
                 </select>
               </div>
               <LineChart chartData={lineChartData} />
