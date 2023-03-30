@@ -15,9 +15,9 @@ export const Statistics = () => {
   const [allClicks, setAllClicks] = useState([]);
   const [clicksPerPlatform, setclicksPerPlatform] = useState([]);
   const [clicksPerTimeStamp, setClicksPerTimeStamp] = useState([]);
-  const [endDate, setEndDate] = useState(moment().subtract(7, "days"));
-  const [filteredClicks, setFilteredClicks] = useState([]);
+  const [filteredByDate, setFilteredByDate] = useState([]);
   const [filteredByPlatform, setFilteredByPlatform] = useState([]);
+  const [endDate, setEndDate] = useState(moment().subtract(7, "days"));
   const [platform, setPlatform] = useState("All");
 
   const options = [
@@ -29,11 +29,11 @@ export const Statistics = () => {
   ]
 
   let lineChartData = {
-    labels: filteredClicks.map((data) => data.timeStamp),
+    labels: filteredByDate.map((data) => data.timeStamp),
     datasets: [
       {
         label: "Total Clicks to date",
-        data: filteredClicks.map((data) => data.occurrence),
+        data: filteredByDate.map((data) => data.occurrence),
       },
     ],
   };
@@ -153,7 +153,7 @@ export const Statistics = () => {
       let arr3 = arr.filter((data) => {
         return moment(data.timeStamp, "DD/MM/YYYY").isBetween(endDate, today);
       });
-      setFilteredClicks(arr3);
+      setFilteredByDate(arr3);
     };
     filterByDate(arr);
   }, [clicksPerTimeStamp, endDate]);
