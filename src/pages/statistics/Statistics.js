@@ -26,7 +26,7 @@ export const Statistics = () => {
     { value: moment().subtract(3, "month").toDate(), label: "Last 3 Months" },
     { value: moment().subtract(6, "month").toDate(), label: "Last 6 Months" },
     { value: moment().subtract(1, "year").toDate(), label: "Last Year" },
-  ]
+  ];
 
   let lineChartData = {
     labels: filteredByDate.map((data) => data.timeStamp),
@@ -97,18 +97,18 @@ export const Statistics = () => {
   }, [allClicks]);
 
   useEffect(() => {
-    if(platform !== "All"){
-    const filterByPlatform = (platform) => {
-      let arr = allClicks;
-      let arr3 = arr.filter((data) => {
-        return data.platform === platform;
-      });
-      setFilteredByPlatform(arr3);
-    };
-    filterByPlatform(platform);
-  }else{
-    setFilteredByPlatform(allClicks)
-  }
+    if (platform !== "All") {
+      const filterByPlatform = (platform) => {
+        let arr = allClicks;
+        let arr3 = arr.filter((data) => {
+          return data.platform === platform;
+        });
+        setFilteredByPlatform(arr3);
+      };
+      filterByPlatform(platform);
+    } else {
+      setFilteredByPlatform(allClicks);
+    }
   }, [allClicks, platform]);
 
   useEffect(() => {
@@ -146,7 +146,6 @@ export const Statistics = () => {
   }, [allClicks, filteredByPlatform]);
 
   useEffect(() => {
-
     let arr = clicksPerTimeStamp;
     const filterByDate = (arr) => {
       let today = moment();
@@ -193,9 +192,9 @@ export const Statistics = () => {
                 >
                   <option value="All">All</option>
                   {clicksPerPlatform.map((click, i) => (
-                      <option key={i} value={click.platform}>
-                        {click.platform}
-                      </option>
+                    <option key={i} value={click.platform}>
+                      {click.platform}
+                    </option>
                   ))}
                 </select>
                 <p className="text-sm p-3 font-semibold">Time frame: </p>
@@ -203,9 +202,12 @@ export const Statistics = () => {
                   onChange={(e) => {
                     setEndDate(e.target.value);
                   }}
-                  className="select select-sm m-1">
+                  className="select select-sm m-1"
+                >
                   {options.map((option, i) => (
-                    <option key={i} value={option.value}>{option.label}</option>
+                    <option key={i} value={option.value}>
+                      {option.label}
+                    </option>
                   ))}
                 </select>
               </div>
