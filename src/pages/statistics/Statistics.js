@@ -17,6 +17,7 @@ export const Statistics = () => {
   const [clicksPerTimeStamp, setClicksPerTimeStamp] = useState([]);
   const [filteredByDate, setFilteredByDate] = useState([]);
   const [filteredByPlatform, setFilteredByPlatform] = useState([]);
+  const [populated, setPopulated] = useState([]);
   const [endDate, setEndDate] = useState(moment().subtract(7, "days"));
   const [platform, setPlatform] = useState("All");
 
@@ -29,11 +30,11 @@ export const Statistics = () => {
   ];
 
   let lineChartData = {
-    labels: filteredByDate.map((data) => data.timeStamp),
+    labels: populated.map((data) => data.timeStamp),
     datasets: [
       {
         label: "Total Clicks to date",
-        data: filteredByDate.map((data) => data.occurrence),
+        data: populated.map((data) => data.occurrence),
       },
     ],
   };
@@ -48,6 +49,7 @@ export const Statistics = () => {
     ],
   };
 
+  //get all clicks
   useEffect(() => {
     const getAllClicks = async () => {
       const clicksRef = collection(db, "users", user.uid, "clicks");
@@ -66,6 +68,7 @@ export const Statistics = () => {
     }
   }, [user]);
 
+  //get clicks per platform, for bar chart
   useEffect(() => {
     const arr = allClicks;
     const key = "platform";
@@ -96,6 +99,7 @@ export const Statistics = () => {
     occurrencePerPlatform(arr, key);
   }, [allClicks]);
 
+  //get clicks per timestamp, filtered by platform for line chart
   useEffect(() => {
     if (platform !== "All") {
       const filterByPlatform = (platform) => {
@@ -111,6 +115,7 @@ export const Statistics = () => {
     }
   }, [allClicks, platform]);
 
+  //get clicks per timestamp, filtered by specific amount of time for line chart
   useEffect(() => {
     const arr = filteredByPlatform;
     const key = "timeStamp";
@@ -135,16 +140,12 @@ export const Statistics = () => {
         }
       });
 
-      let sortedClicks = arr2.sort(
-        (a, b) =>
-          new Date(...a.timeStamp.split("/").reverse()) -
-          new Date(...b.timeStamp.split("/").reverse())
-      );
-      setClicksPerTimeStamp(sortedClicks);
+      setClicksPerTimeStamp(arr2);
     };
     occurrencePerTimeStamp(arr, key);
   }, [allClicks, filteredByPlatform]);
 
+  //filter clicks per timestamp by specific amount of time
   useEffect(() => {
     let arr = clicksPerTimeStamp;
     const filterByDate = (arr) => {
@@ -157,6 +158,39 @@ export const Statistics = () => {
     filterByDate(arr);
   }, [clicksPerTimeStamp, endDate]);
 
+  //populate array with empty objects for days without clicks
+  useEffect(() => {
+    let today = moment();
+    let daysBetween = today.diff(endDate, 'd', false);
+    let arr = filteredByDate;
+
+    const populate = () =>{
+      let newArr = []
+      let final = moment(endDate)
+
+      for (let i = 0; i < daysBetween; i++) {
+      newArr.push({"timeStamp" : final.add(1, 'day').format("DD/MM/YYYY").toString(), 'occurrence': 0  })
+      }
+      
+      let result = [...arr, ...newArr].reduce((acc, current) => {
+        acc[current.timeStamp] = (acc[current.timeStamp] || 0) + current.occurrence;
+        return acc;
+      }, {});
+      
+      result = Object.entries(result).map(([timeStamp, occurrence]) => ({ timeStamp, occurrence }));
+
+      let sorted = result.sort(
+        (a, b) =>
+          new Date(...a.timeStamp.split("/").reverse()) -
+          new Date(...b.timeStamp.split("/").reverse())
+      );
+
+      setPopulated(sorted)
+  }
+  populate()
+  }, [filteredByDate, endDate]);
+
+  
   return (
     <div>
       <Navbar />
