@@ -155,8 +155,8 @@ export const Dashboard = () => {
               />
             ))
           : null}
-        <div className="w-full flex justify-end ">
-          <label htmlFor="my-modal-6" className="btn btn-primary m-2 w-5/12">
+        <div className="w-full flex justify-center ">
+          <label htmlFor="my-modal-6" className="btn btn-primary m-2 w-11/12">
             <span>Add New Link</span>
             <span className="ml-3">
               <svg
