@@ -20,6 +20,7 @@ export const Statistics = () => {
   const [populated, setPopulated] = useState([]);
   const [endDate, setEndDate] = useState(moment().subtract(7, "days"));
   const [platform, setPlatform] = useState("All");
+  const [timeframe, setTimeFrame] = useState("7");
 
   const options = [
     { value: moment().subtract(7, "days").toDate(), label: "Last 7 Days" },
@@ -33,7 +34,7 @@ export const Statistics = () => {
     labels: populated.map((data) => data.timeStamp),
     datasets: [
       {
-        label: "Total Clicks to date",
+        label: platform + " clicks for the last " + timeframe + " days",
         data: populated.map((data) => data.occurrence),
       },
     ],
@@ -162,6 +163,7 @@ export const Statistics = () => {
   useEffect(() => {
     let today = moment();
     let daysBetween = today.diff(endDate, 'd', false);
+    setTimeFrame(daysBetween)
     let arr = filteredByDate;
 
     const populate = () =>{

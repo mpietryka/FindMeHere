@@ -9,7 +9,11 @@ export const LineChart = ({ chartData }) => {
     maintainAspectRatio: false,
       scales: {
         y: {
-          min: 0,
+          ticks: {
+            stepSize: 1,
+            suggestedMin: 0,
+            suggestedMax: 10,
+          },
           beginAtZero: true,
         },
       },
