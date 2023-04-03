@@ -148,9 +148,9 @@ export const Statistics = () => {
 
   //filter clicks per timestamp by specific amount of time
   useEffect(() => {
+    let today = moment();
     let arr = clicksPerTimeStamp;
     const filterByDate = (arr) => {
-      let today = moment();
       let arr3 = arr.filter((data) => {
         return moment(data.timeStamp, "DD/MM/YYYY").isBetween(endDate, today);
       });
@@ -162,24 +162,31 @@ export const Statistics = () => {
   //populate array with empty objects for days without clicks
   useEffect(() => {
     let today = moment();
-    let daysBetween = today.diff(endDate, 'd', false);
-    setTimeFrame(daysBetween)
+    let daysBetween = today.diff(endDate, "d", false);
+    setTimeFrame(daysBetween);
     let arr = filteredByDate;
 
-    const populate = () =>{
-      let newArr = []
-      let final = moment(endDate)
+    const populate = () => {
+      let newArr = [];
+      let final = moment(endDate);
 
       for (let i = 0; i < daysBetween; i++) {
-      newArr.push({"timeStamp" : final.add(1, 'day').format("DD/MM/YYYY").toString(), 'occurrence': 0  })
+        newArr.push({
+          timeStamp: final.add(1, "day").format("DD/MM/YYYY").toString(),
+          occurrence: 0,
+        });
       }
-      
+
       let result = [...arr, ...newArr].reduce((acc, current) => {
-        acc[current.timeStamp] = (acc[current.timeStamp] || 0) + current.occurrence;
+        acc[current.timeStamp] =
+          (acc[current.timeStamp] || 0) + current.occurrence;
         return acc;
       }, {});
-      
-      result = Object.entries(result).map(([timeStamp, occurrence]) => ({ timeStamp, occurrence }));
+
+      result = Object.entries(result).map(([timeStamp, occurrence]) => ({
+        timeStamp,
+        occurrence,
+      }));
 
       let sorted = result.sort(
         (a, b) =>
@@ -187,12 +194,11 @@ export const Statistics = () => {
           new Date(...b.timeStamp.split("/").reverse())
       );
 
-      setPopulated(sorted)
-  }
-  populate()
+      setPopulated(sorted);
+    };
+    populate();
   }, [filteredByDate, endDate]);
 
-  
   return (
     <div>
       <Navbar />
@@ -208,12 +214,8 @@ export const Statistics = () => {
 
         {clicksPerTimeStamp ? (
           <div className="text-center text-2xl mb-20">
-            <h1 className="text-2xl md:text-3xl font-bold mt-6 text-center w-4/5 mx-auto">
-              Demo Charts Generated for the overall Statistics
-            </h1>
             <div className="mx-auto w-11/12 border border-gray-50 shadow-lg mt-4 mb-8">
-              <div className="h-56 md:h-80 my-6">
-                <h1>BarChart</h1>
+              <div className="h-56 md:h-80 mb-6">
                 <BarChart chartData={barChartData} />
               </div>
             </div>
