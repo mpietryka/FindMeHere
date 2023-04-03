@@ -155,26 +155,7 @@ export const Dashboard = () => {
               />
             ))
           : null}
-        <div className="w-full flex justify-evenly">
-          <button className="btn btn-secondary m-2 w-5/12">
-            <span>Add New Widget</span>
-            <span className="ml-3">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 4.5v15m7.5-7.5h-15"
-                />
-              </svg>
-            </span>
-          </button>
+        <div className="w-full flex justify-end ">
           <label htmlFor="my-modal-6" className="btn btn-primary m-2 w-5/12">
             <span>Add New Link</span>
             <span className="ml-3">
