@@ -80,8 +80,9 @@ export const PrivacyPolicy = () => {
           please contact us.
         </p>
         <p className="text-gray-500 mt-8 mb-20 text-xs">
-          <small>Please note that this privacy policy was generated using a free online
-          tool as a placeholder only.
+          <small>
+            Please note that this privacy policy was generated using a free
+            online tool as a placeholder only.
           </small>
         </p>
       </div>
