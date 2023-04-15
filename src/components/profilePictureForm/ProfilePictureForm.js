@@ -8,7 +8,7 @@ export const ProfilePictureForm = ({
   handleSubmit,
 }) => {
   return (
-    <div className="mx-auto mt-0 w-3/4 px-4 pb-4 md:mt-5 lg:w-1/2">
+    <div className="mx-auto mt-0 w-full px-4 pb-4 md:mt-5 lg:w-1/2">
       <figure className="py-5 md:px-10 md:py-10">
         {currentUser && !currentUser.profilePicture && !image ? (
           <img
@@ -38,7 +38,7 @@ export const ProfilePictureForm = ({
           accept=".jpg,.jpeg,.png"
           onChange={handleImageChange}
         />
-        <div className="mx-auto w-3/4">
+        <div className="mx-auto w-11/12 md:w-3/4">
           <div className="mb-3 text-white ">
             <label
               className="btn btn-primary mt-2 flex w-full cursor-pointer flex-row justify-center rounded-md px-4 py-3 text-center text-white"

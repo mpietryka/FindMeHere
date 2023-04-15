@@ -2,7 +2,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import React from "react";
 import * as Yup from "yup";
 
-export const AddLinkForm = ({ addLink }) => {
+export const AddLinkForm = ({ addLink, setShowAddLinkModal }) => {
   const validate = Yup.object({
     link: Yup.string().required("Please enter your URL"),
   });
@@ -53,6 +53,8 @@ export const AddLinkForm = ({ addLink }) => {
             type="text"
             autoComplete="off"
           />
+        </div>
+        <div className="flex justify-end p-2">
           <button
             type="submit"
             className="btn-primary text-white hidden md:block btn rounded-md"
@@ -64,6 +66,13 @@ export const AddLinkForm = ({ addLink }) => {
             className=" md:hidden btn btn-primary text-white rounded-md"
           >
             Add
+          </button>
+          <button
+            className="btn bg-red-500 border-none text-white rounded-md ml-4"
+            type="button"
+            onClick={() => setShowAddLinkModal(false)}
+          >
+            Cancel
           </button>
         </div>
         <div className="text-center text-error font-bold mb-3">

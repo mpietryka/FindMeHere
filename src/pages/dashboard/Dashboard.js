@@ -2,8 +2,10 @@ import React, { useContext, useState, useEffect } from "react";
 import { Footer, Navbar } from "../../components";
 import { AddLinkForm } from "../../components/addLinkForm/AddLinkForm";
 import { DisplayLink } from "../../components/displayLink/DisplayLink";
+import { ProfilePictureForm } from "../../components/profilePictureForm/ProfilePictureForm";
 import { Loading } from "../loading/Loading";
 import { AuthContext } from "../../context/auth";
+import swal from "sweetalert";
 import {
   doc,
   getDoc,
@@ -49,11 +51,31 @@ const linkRemoved = () => {
   });
 };
 
+const photoUpdated = () => {
+  toast.success("Your profile picture was updated !", {
+    position: toast.POSITION.TOP_RIGHT,
+    draggable: true,
+    autoClose: 1500,
+    hideProgressBar: true,
+  });
+};
+
 export const Dashboard = () => {
   const { user } = useContext(AuthContext);
   const [currentUser, setCurrentUser] = useState();
   const [links, setLinks] = useState([]);
+  const [showAddLinkModal, setShowAddLinkModal] = useState(false);
+  const [showProfilePictureModal, setShowProfilePictureModal] = useState(false);
+  const [image, setImage] = useState("");
 
+  useEffect(() => {
+    onSnapshot(doc(db, "users", user.uid), (doc) => {
+      setCurrentUser(doc.data());
+  });
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  /*
   useEffect(() => {
     const getUser = async () => {
       const docRef = doc(db, "users", user.uid);
@@ -62,7 +84,8 @@ export const Dashboard = () => {
     };
     getUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [picChanged]);
+  */
 
   useEffect(() => {
     const getLinks = () => {
@@ -110,7 +133,7 @@ export const Dashboard = () => {
       uid: newLink.id,
     });
     linkAdded();
-
+    setShowAddLinkModal(false);
     console.log(values);
   };
 
@@ -119,6 +142,34 @@ export const Dashboard = () => {
 
     await deleteDoc(linkRef);
     linkRemoved();
+  };
+
+  const handleImageChange = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      let reader = new FileReader();
+      reader.onload = function (e) {
+        setImage(e.target.result);
+      };
+      reader.readAsDataURL(e.target.files[0]);
+    }
+  };
+
+  const handleSubmit = () => {
+    const userRef = doc(db, "users", user.uid);
+    if (!image) {
+      swal(
+        "You have not uploaded anything",
+        "Select a file and try again",
+        "warning"
+      );
+    } else {
+      const updatePic = async () => {
+        await updateDoc(userRef, { profilePicture: image });
+      };
+      updatePic();
+      photoUpdated();
+      setShowProfilePictureModal(false);
+    }
   };
 
   return (
@@ -131,7 +182,13 @@ export const Dashboard = () => {
           <Loading />
         )}
         {currentUser ? (
-          <ProfilePicture currentUser={currentUser} avatar={avatar} />
+          <button
+            className="rounded-full overflow-hidden hover:opacity-90"
+            type="button"
+            onClick={() => setShowProfilePictureModal(true)}
+          >
+            <ProfilePicture currentUser={currentUser} avatar={avatar} />
+          </button>
         ) : (
           <Loading />
         )}
@@ -155,44 +212,111 @@ export const Dashboard = () => {
               />
             ))
           : null}
-        <div className="w-full flex justify-center ">
-          <label htmlFor="my-modal-6" className="btn btn-primary m-2 w-11/12">
-            <span>Add New Link</span>
-            <span className="ml-3">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 4.5v15m7.5-7.5h-15"
-                />
-              </svg>
-            </span>
-          </label>
+        <div className="w-full flex justify-end">
+          <button
+            className="btn btn-accent transition ease-in-out btn-circle m-2 "
+            type="button"
+            onClick={() => setShowAddLinkModal(true)}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 4.5v15m7.5-7.5h-15"
+              />
+            </svg>
+          </button>
         </div>
-        <input type="checkbox" id="my-modal-6" className="modal-toggle" />
-        <div className="modal">
-          <div className="modal-box w-11/12 max-w-5xl">
-            <h1 className="text-2xl md:text-3xl font-bold mt-2 mb-4 text-center w-4/5 mx-auto">
-              Add New Link
-            </h1>
-            <AddLinkForm addLink={addLink} />
-            <div className="modal-action w-full">
-              <label
-                htmlFor="my-modal-6"
-                className="btn w-3/4 mx-auto btn-primary"
-              >
-                Done
-              </label>
+        {showAddLinkModal ? (
+          <>
+            <div className="justify-center m-0 md:mx-auto w-10/12 items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none text-black">
+              <div className="w-11/12 md:w-3/4 max-w-3xl">
+                <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                  <div className="flex items-start justify-between p-5 border-b border-solid rounded-t">
+                    <h3 className="text-3xl font-semibold">Add New Link</h3>
+                    <button
+                      className="p-1 ml-auto float-right text-3xl font-semibold text-black"
+                      onClick={() => setShowAddLinkModal(false)}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="w-6 h-6 "
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                  <div className="relative p-6 flex-auto">
+                    <AddLinkForm
+                      addLink={addLink}
+                      setShowAddLinkModal={setShowAddLinkModal}
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+            <div className="opacity-50 fixed inset-0 z-40 bg-black"></div>
+          </>
+        ) : null}
+        {showProfilePictureModal ? (
+          <>
+            <div className="justify-center m-0 md:mx-auto w-10/12 items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none text-black">
+              <div className="w-11/12 md:w-3/4 max-w-3xl">
+                <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                  <div className="flex items-start justify-between p-5 border-b border-solid rounded-t">
+                    <h3 className="text-3xl font-semibold">
+                      Change Profile Picture
+                    </h3>
+                    <button
+                      className="p-1 ml-auto float-right text-3xl font-semibold text-black"
+                      onClick={() => setShowProfilePictureModal(false)}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="w-6 h-6 "
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                  <div className="relative p-6 flex-auto">
+                    <ProfilePictureForm
+                      image={image}
+                      currentUser={currentUser}
+                      handleImageChange={handleImageChange}
+                      handleSubmit={handleSubmit}
+                      avatar={avatar}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="opacity-50 fixed inset-0 z-40 bg-black"></div>
+          </>
+        ) : null}
       </div>
       <Footer />
       <ToastContainer pauseOnFocusLoss={false} />
