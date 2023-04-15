@@ -8,8 +8,8 @@ export const ProfilePictureForm = ({
   handleSubmit,
 }) => {
   return (
-    <div className="mx-auto mt-0 w-full px-4 pb-4 md:mt-5 lg:w-1/2">
-      <figure className="py-5 md:px-10 md:py-10">
+    <div className="mx-auto w-full px-4 pb-4 lg:w-1/2">
+      <figure className="py-5 ">
         {currentUser && !currentUser.profilePicture && !image ? (
           <img
             className="mx-auto rounded-full object-cover h-64 w-64 lg:h-72 lg:w-72 mask mask-circle"

@@ -8,7 +8,7 @@ import { AuthContext } from "../../context/auth";
 import swal from "sweetalert";
 import {
   doc,
-  getDoc,
+  //getDoc,
   query,
   collection,
   onSnapshot,
@@ -71,8 +71,8 @@ export const Dashboard = () => {
   useEffect(() => {
     onSnapshot(doc(db, "users", user.uid), (doc) => {
       setCurrentUser(doc.data());
-  });
-      // eslint-disable-next-line react-hooks/exhaustive-deps
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   /*
@@ -175,20 +175,56 @@ export const Dashboard = () => {
   return (
     <div>
       <Navbar />
-      <div className="text-center mx-auto border border-gray-50 shadow-lg w-11/12 lg:w-1/2 mt-4 rounded-lg">
+      <div className="text-center mx-auto border border-gray-50 shadow-lg w-11/12 lg:w-1/2 mt-4 rounded-lg ">
         {currentUser ? (
           <h1 className="text-5xl my-6 font-bold"> {currentUser.username}</h1>
         ) : (
           <Loading />
         )}
         {currentUser ? (
-          <button
-            className="rounded-full overflow-hidden hover:opacity-90"
-            type="button"
-            onClick={() => setShowProfilePictureModal(true)}
-          >
-            <ProfilePicture currentUser={currentUser} avatar={avatar} />
-          </button>
+          <>
+            <div className="flex items-center justify-center my-6">
+              <a className="relative group rounded-full" href="##">
+                <div className="absolute h-64 w-64 lg:h-72 lg:w-72 group-hover:opacity-60 rounded-full overflow-hidden">
+                  <ProfilePicture currentUser={currentUser} avatar={avatar} />
+                </div>
+                <div className="relative rounded-full overflow-hidden">
+                  <div className="overflow-hidden h-64 w-64 lg:h-72 lg:w-72 rounded-full">
+                    <div className="transition-all transform translate-y-8 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 rounded-full overflow-hidden">
+                      <button
+                        className="hover:opacity-90 ease-in-out transition-opacity h-64 w-64 lg:h-72 lg:w-72"
+                        type="button"
+                        onClick={() => setShowProfilePictureModal(true)}
+                      >
+                        <p className="flex justify-center text-center text-white">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="w-12 h-12"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z"
+                            />
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z"
+                            />
+                          </svg>
+                        </p>
+                        <p className="text-white">Change Profile Picture</p>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </>
         ) : (
           <Loading />
         )}
@@ -214,10 +250,12 @@ export const Dashboard = () => {
           : null}
         <div className="w-full flex justify-end">
           <button
-            className="btn btn-accent transition ease-in-out btn-circle m-2 "
+            className="btn btn-accent transition ease-in-out rounded-full my-3 mx-2 "
             type="button"
             onClick={() => setShowAddLinkModal(true)}
-          >
+          > 
+          <div className="flex flex-row">
+            <p className="mt-1 mx-1">Add</p>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -232,6 +270,7 @@ export const Dashboard = () => {
                 d="M12 4.5v15m7.5-7.5h-15"
               />
             </svg>
+            </div>
           </button>
         </div>
         {showAddLinkModal ? (
