@@ -173,7 +173,7 @@ export const Dashboard = () => {
   };
 
   return (
-    <div>
+    <div className=" max-w-sm md:max-w-md lg:max-w-lg">
       <Navbar />
       <div className="text-center mx-auto border border-gray-50 shadow-lg w-11/12 lg:w-1/2 mt-4 rounded-lg ">
         {currentUser ? (
@@ -275,7 +275,7 @@ export const Dashboard = () => {
         </div>
         {showAddLinkModal ? (
           <>
-            <div className="justify-center m-0 md:mx-auto w-10/12 items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none text-black">
+            <div className="justify-center m-0 md:mx-auto w-11/12 items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none text-black">
               <div className="w-11/12 md:w-3/4 max-w-3xl">
                 <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                   <div className="flex items-start justify-between p-5 border-b border-solid rounded-t">
@@ -314,7 +314,7 @@ export const Dashboard = () => {
         ) : null}
         {showProfilePictureModal ? (
           <>
-            <div className="justify-center m-0 md:mx-auto w-10/12 items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none text-black">
+            <div className="justify-center m-0 md:mx-auto w-11/12 items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none text-black">
               <div className="w-11/12 md:w-3/4 max-w-3xl">
                 <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                   <div className="flex items-start justify-between p-5 border-b border-solid rounded-t">
