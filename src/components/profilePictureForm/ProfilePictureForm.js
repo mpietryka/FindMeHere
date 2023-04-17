@@ -8,7 +8,7 @@ export const ProfilePictureForm = ({
   handleSubmit,
 }) => {
   return (
-    <div className="mx-auto w-full px-4 pb-4 lg:w-1/2">
+    <div className="mx-auto w-full px-4 pb-4 ">
       <figure className="py-5 ">
         {currentUser && !currentUser.profilePicture && !image ? (
           <img
