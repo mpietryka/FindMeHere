@@ -24,11 +24,11 @@ export const AddLinkForm = ({ addLink, setShowAddLinkModal }) => {
       }}
     >
       <Form>
-        <div className="mx-auto flex flex-row w-full p-2">
+        <div className="mx-auto flex flex-row w-full">
           <Field
             as="select"
             name="platform"
-            className="select bg-primary w-1/3 md:w-1/4 rounded-md text-white"
+            className="select bg-primary w-1/3 md:w-1/4 rounded-md text-white mr-2"
           >
             <option value="" disabled>
               Platform
