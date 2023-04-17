@@ -219,8 +219,9 @@ export const Statistics = () => {
                 <BarChart chartData={barChartData} />
               </div>
             </div>
-            <div className="h-56 md:h-80 mx-auto w-11/12 border border-gray-50 shadow-lg mt-4 mb-16 pb-8">
-              <div className="w-full flex justify-start">
+            <div className="h-56 md:h-80 mx-auto w-11/12 border border-gray-50 shadow-lg mt-4 mb-16 pb-24 md:pb-8">
+              <div className="w-full flex flex-col md:flex-row justify-start">
+                <div className="flex">
                 <p className="text-sm p-3 font-semibold">Platform: </p>
                 <select
                   onChange={(e) => {
@@ -235,6 +236,8 @@ export const Statistics = () => {
                     </option>
                   ))}
                 </select>
+                </div>
+                <div className="flex">
                 <p className="text-sm p-3 font-semibold">Time frame: </p>
                 <select
                   onChange={(e) => {
@@ -248,6 +251,7 @@ export const Statistics = () => {
                     </option>
                   ))}
                 </select>
+                </div>
               </div>
               <LineChart chartData={lineChartData} />
             </div>

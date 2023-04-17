@@ -18,5 +18,5 @@ export const LineChart = ({ chartData }) => {
     },
   };
 
-  return <Line data={chartData} options={options} className="p-4" />;
+  return <Line data={chartData} options={options} className="pt-2 pb-6 md:p-4" />;
 };
