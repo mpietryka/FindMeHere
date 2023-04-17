@@ -219,7 +219,7 @@ export const Statistics = () => {
                 <BarChart chartData={barChartData} />
               </div>
             </div>
-            <div className="h-56 md:h-80 mx-auto w-11/12 border border-gray-50 shadow-lg mt-4 mb-16 pb-24 md:pb-8">
+            <div className="h-56 md:h-80 mx-auto w-11/12 border border-gray-50 shadow-lg mt-4 mb-16 pb-24">
               <div className="w-full flex flex-col md:flex-row justify-start">
                 <div className="flex">
                 <p className="text-sm p-3 font-semibold">Platform: </p>
@@ -253,7 +253,9 @@ export const Statistics = () => {
                 </select>
                 </div>
               </div>
+              <div className=" h-36 md:h-64 mb-0">
               <LineChart chartData={lineChartData} />
+              </div>
             </div>
           </div>
         ) : null}
