@@ -173,7 +173,7 @@ export const Dashboard = () => {
   };
 
   return (
-    <div className=" max-w-sm md:max-w-md lg:max-w-lg overflow-hidden">
+    <div className="overflow-hidden">
       <Navbar />
       <div className="text-center mx-auto border border-gray-50 shadow-lg w-11/12 lg:w-1/2 mt-4 rounded-lg ">
         {currentUser ? (
