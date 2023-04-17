@@ -253,7 +253,7 @@ export const Statistics = () => {
                 </select>
                 </div>
               </div>
-              <div className="h-48 md:h-72 pb-12">
+              <div className="h-64 md:h-72">
               <LineChart chartData={lineChartData} />
               </div>
             </div>
