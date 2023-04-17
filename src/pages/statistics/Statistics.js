@@ -200,7 +200,7 @@ export const Statistics = () => {
   }, [filteredByDate, endDate]);
 
   return (
-    <div>
+    <div className="overflow-hidden">
       <Navbar />
       <h1 className="text-4xl md:text-5xl font-bold mt-6 text-center w-4/5 mx-auto">
         Statistics
