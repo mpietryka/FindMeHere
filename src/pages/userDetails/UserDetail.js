@@ -35,7 +35,7 @@ export const UserDetail = () => {
   }, [param.username]);
 
   return (
-    <div>
+    <div className="overflow-hidden">
       <Navbar />
       <div className="text-center mx-auto ">
         {thatUser === null ? (
