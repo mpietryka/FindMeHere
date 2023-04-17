@@ -214,12 +214,14 @@ export const Statistics = () => {
 
         {clicksPerTimeStamp ? (
           <div className="text-center text-2xl mb-20">
+            {/* Bar Chart */}
             <div className="mx-auto w-11/12 border border-gray-50 shadow-lg mt-4 mb-8">
               <div className="h-56 md:h-80 mb-6">
                 <BarChart chartData={barChartData} />
               </div>
             </div>
-            <div className="h-56 md:h-80 mx-auto w-11/12 border border-gray-50 shadow-lg mt-4 mb-16 pb-36">
+            {/* Line Chart */}
+            <div className="h-56 md:h-80 mx-auto w-11/12 border border-gray-50 shadow-lg mt-4 mb-16 pb-80">
               <div className="w-full flex flex-col md:flex-row justify-start">
                 <div className="flex">
                 <p className="text-sm p-3 font-semibold">Platform: </p>
@@ -253,7 +255,7 @@ export const Statistics = () => {
                 </select>
                 </div>
               </div>
-              <div className="h-64 md:h-72">
+              <div className="h-72 pb-12">
               <LineChart chartData={lineChartData} />
               </div>
             </div>
