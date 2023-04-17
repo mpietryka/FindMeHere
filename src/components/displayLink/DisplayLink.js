@@ -30,7 +30,7 @@ export const DisplayLink = ({ currentUser, link, deleteLink }) => {
       >
         {link.platform}
       </a>
-      <div className="tooltip tooltip-right" data-tip="Delete Link">
+      <div className="tooltip tooltip-top" data-tip="Delete Link">
         <button
           className="btn btn-primary transition ease-in-out hover:btn-error btn-circle btn-sm mt-2 "
           onClick={deleteThis}
